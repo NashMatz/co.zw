@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:tiles="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org"
+       lang="en">
+
+<head>
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthCommunicatorsForum</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
+<link href="">
+  <link href="/bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link href="mdb/css/mdb.min.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicons -->
+  <style>
+
+    .popup {
+      visibility: hidden;
+      position: absolute;
+      min-width: 450px;
+      min-height: 200px;
+      padding: 20px;
+      border: 1px solid black;
+      background-color: #dddddd;
+      font-size: 19px;
+    }
+
+    #innertext {
+      margin-left: auto;
+      margin-right: auto;
+      width: 300px;
+    }
+
+    #torus {
+      width: 80px;
+      border: 1px solid black;
+      position: absolute;
+      left: 0px;
+      top: 100px;
+      padding: 10px;
+      background-color: white
+    }
+
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+    .about{
+      font-display:blue;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .CompanyName {
+
+      position: relative;
+      animation-name: example;
+      animation-duration: 4s;
+      animation-delay: 0s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes example {
+      from {
+        top: -20px;
+      }
+
+      to {
+        top: 50px;
+      }
+    }
+
+    .ro {
+
+      position: relative;
+      animation-name: example;
+      animation-duration: 4s;
+      animation-delay: -2s;
+      animation-fill-mode: forwards;
+      animation-timeline: page scroll;
+    }
+
+    @keyframes example {
+      from {
+        top: -20px;
+      }
+
+      to {
+        top: 50px;
+      }
+    }
+
+
+    @keyframes slideInLeft {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .about {
+        animation-duration: 2s;
+        animation-timing-function: ease-in-out;
+        animation-delay: 0s;
+        animation-iteration-count:1 ;
+        animation-name: slideInLeft;
+        padding: 40px;
+      }
+      .part {
+        animation-duration: 2s;
+        animation-timing-function: ease-in-out;
+        animation-delay: 0s;
+        animation-iteration-count:1 ;
+        animation-name: slideInLeft;
+        padding: 40px;
+      }
+      .col {
+        animation-duration: 2s;
+        animation-timing-function: ease-out;
+        animation-delay: 2s;
+        animation-iteration-count:1 ;
+        animation-name: popup;
+
+      }
+
+      .album{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 2;
+  transition: 2s all ease;
+}
+.album.active{
+  transform: translateX(2);
+  opacity: 1;
+}
+
+  </style>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <header class="site-header sticky-top py-1">
+      <nav class="container-fluid d-flex navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="media/logo.png" width="100" height="100" fill="none" stroke="currentColor" stroke-linecap="round"
+                 stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img" viewBox="0 0 24 24">
+            <title>HealthCommunicationForumHome</title>
+            <circle cx="12" cy="12" r="10"></circle>
+            <path
+              d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="BoardProfile.html">Board Members</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Health.html">Health Stories</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/sciencecafe">Science Cafe</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Gallery.html">Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#footer">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#footer">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="LogIn.html">LogIn</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-info" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main >
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+          <p class="CompanyName" style="font-size:xxx-large ;">Health Communicators Forum </p><br><br>
+          <h4>
+            Giving you Expert Views on Health</h4><br>
+          <a class="btn btn-sm btn-primary" role="button" href="Health.html">Health Stories</a>
+        </div>
+      </div>
+<div class="part">
+      <div class="row align-items-md-stretch" >
+        <div class="col-md-6" th:object="${sciencecafe}">
+          <div class="card bg-primary text-dark">
+            <img id="popup"   class="card-img" alt="...">
+            <div class="card-body">
+              <button type="button" class="btn btn-sm btn-light" role="button">Read More</button>
+              <h5 class="card-title text-dark" th:text="${sciencecafe.dcaption}">
+              
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-primary text-dark">
+            <img src="media/covid.jpg" class="card-img" alt="...">
+            <div class="card-body">
+              <button type="button" class="btn btn-sm btn-light">Read More</button>
+              <br><br>
+              <h5 class="card-title text-dark" th:text="${sciencecafe.topic}">
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+      <div class="album">
+        <div class="container">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="media/virginring.jpg" class="card-img" alt="...">
+
+                <div class="card-body">
+                  <h4>Dapivirine, Vaginal Ring Approved For Use In Zimbabwe </h4>
+                  <p class="card-text"></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Read More</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <i class="fas fa-car-side fa-3x" data-mdb-toggle="animation" data-mdb-animation-reset="true"
+                data-mdb-animation="slide-out-right">
+                <div class="card shadow-sm ">
+                  <img src="media/Anna.jpg" class="card-img" alt="..." data-mdb-animation-start="onHover">
+                  <div class="card-body">
+                    <h4>
+                      Zimbabwe's Health Communicators Forum Launched
+                    </h4>
+                    <p class="card-text"></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Read More</button>
+
+                      </div>
+                      <small class="text-muted">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </i>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="media/womenman.jpg" class="card-img" alt="...">
+                <div class="card-body">
+                  <h4>
+                    Queen B Chihera
+                    Agonies of a woman in a man’s body
+                  </h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Read More</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="media/Antoinette-Ngoma.jpeg" class="card-img" alt="...">
+                <div class="card-body">
+                  <h4> Antoinette Ngoma, Head of Programs at Plan International Zimbabwe (C)</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Read More</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="media/img.jpg" class="card-img" alt="...">
+                <div class="card-body">
+                  <h4>The agony of Long Covid</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Read More</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="media/images%20(1).jpg" class="card-img" alt="...">
+                <div class="card-body">
+                  <h4>Outcry As Major Funders Pull The Plug On Dapivirine Vaginal Ring Rollout</h4>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Read More</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cafe">
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">The Science Café program</h1>
+            <p class="lead text-muted">
+              With support from AVAC and under the incubation from the Humanitarian Information Facilitation centre the
+              HCF regularly hosts science meetings for journalists to learn more about different health and science
+              topics. We have covered topics such as the HIV Cure, vaccines and Covid 19
+            <p>
+              <a href="ScienceCafe.html" class="btn btn-primary my-2">Science Café</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    </main>
+
+    <footer class=" bg-dark container-fluid py-5">
+      <div class="row">
+        <div class="col-12 col-md">
+          <img src="media/logo%20hcf.png" width="200" height="200" fill="none" stroke="currentColor"
+               stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
+               viewBox="0 0 24 24">
+          <title>Product</title>
+          <circle cx="12" cy="12" r="10"></circle>
+          <path
+            d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94">
+            <small class="d-block mb-3">©2022</small>
+        </div>
+        <div class="col-6 col-md text-primary">
+          <h5 class="text-light">Contact Us</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary text-primary" href="#"></a></li>
+            <li>
+              <img src="media/images-removebg-preview%20(41).png" height="25" width="25">
+              <p class="link-secondary text-primary" href="#"> 38 Harvey Brown Avenue,<br>Harare, <br>Zimbabwe</p>
+            </li>
+            <li>
+              <img src="media/images-removebg-preview.png" height="25" width="25">
+              <p class="link-secondary text-primary" href="#">admin@healthtcommunicatorsforum.co.zw </p></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5 class="text-light">About</h5>
+              <p class="text-primary"> The Health Communicators Forum is a network of Journalists, communicators and other media persons
+              with a keen interest or directly work in health information. Our aim is to be the bridge between
+              journalists, researchers, communicators, and the community. We sincerely believe that health is more
+              than a news story, but a matter of life and death for everyone. Our members are active journalists.
+              Bloggers and news writers from diverse backgrounds</p>
+          <p class="year">©2022</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+  <script src="/www.HealthCommunicatorsForum/bootstrap-5.2.0/js/bootstrap.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>
